@@ -88,12 +88,12 @@ WaitForEstablishedConnection:
 	// sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 	// db := bun.NewDB(sqldb, pgdialect.New())
 	// utils.Db = db
-	const name = "magic-master"
+	const name = "it"
 	srv, err := micro.AddService(nc, micro.Config{
 		Name: name,
 
 		Version:     "0.0.1",
-		Description: "Magic People",
+		Description: "Magic IT",
 	})
 	root := srv.AddGroup(name)
 	RegisterServiceCoreEndpoints(root)

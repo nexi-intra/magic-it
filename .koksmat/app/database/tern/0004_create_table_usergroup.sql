@@ -9,7 +9,7 @@ keep: false
 
 -- sure sild
 
-CREATE TABLE public.person
+CREATE TABLE public.usergroup
 (
     id SERIAL PRIMARY KEY,
     created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,23 +23,12 @@ CREATE TABLE public.person
     ,searchindex character varying COLLATE pg_catalog."default"  NOT NULL
     ,name character varying COLLATE pg_catalog."default"  NOT NULL
     ,description character varying COLLATE pg_catalog."default" 
-    ,email character varying COLLATE pg_catalog."default" 
-    ,displayname character varying COLLATE pg_catalog."default" 
-    ,firstname character varying COLLATE pg_catalog."default"  NOT NULL
-    ,lastname character varying COLLATE pg_catalog."default"  NOT NULL
-    ,uniqueid character varying COLLATE pg_catalog."default"  NOT NULL
-    ,nationality_id int  
 
 
 );
 
-                ALTER TABLE IF EXISTS public.person
-                ADD FOREIGN KEY (nationality_id)
-                REFERENCES public.country (id) MATCH SIMPLE
-                ON UPDATE NO ACTION
-                ON DELETE NO ACTION
-                NOT VALID;                -- lollipop
-                CREATE TABLE public.person_m2m_relation (
+                -- lollipop
+                CREATE TABLE public.usergroup_m2m_user (
                 id SERIAL PRIMARY KEY,
                 created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 created_by character varying COLLATE pg_catalog."default"  ,
@@ -47,30 +36,30 @@ CREATE TABLE public.person
                 updated_by character varying COLLATE pg_catalog."default",
                 deleted_at timestamp with time zone
                 
-                    ,person_id int  
+                    ,usergroup_id int  
  
-                    ,relation_id int  
+                    ,user_id int  
  
 
                 );
             
 
-                ALTER TABLE public.person_m2m_relation
-                ADD FOREIGN KEY (person_id)
-                REFERENCES public.person (id) MATCH SIMPLE
+                ALTER TABLE public.usergroup_m2m_user
+                ADD FOREIGN KEY (usergroup_id)
+                REFERENCES public.usergroup (id) MATCH SIMPLE
                 ON UPDATE NO ACTION
                 ON DELETE NO ACTION
                 NOT VALID;
 
-                ALTER TABLE public.person_m2m_relation
-                ADD FOREIGN KEY (relation_id)
-                REFERENCES public.relation (id) MATCH SIMPLE
+                ALTER TABLE public.usergroup_m2m_user
+                ADD FOREIGN KEY (user_id)
+                REFERENCES public.user (id) MATCH SIMPLE
                 ON UPDATE NO ACTION
                 ON DELETE NO ACTION
                 NOT VALID;
 
 
 ---- create above / drop below ----
-DROP TABLE IF EXISTS public.person_m2m_relation;
-DROP TABLE public.person;
+DROP TABLE IF EXISTS public.usergroup_m2m_user;
+DROP TABLE public.usergroup;
 

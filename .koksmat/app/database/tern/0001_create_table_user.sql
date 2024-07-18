@@ -9,7 +9,7 @@ keep: false
 
 -- sure sild
 
-CREATE TABLE public.country
+CREATE TABLE public.user
 (
     id SERIAL PRIMARY KEY,
     created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,7 +23,7 @@ CREATE TABLE public.country
     ,searchindex character varying COLLATE pg_catalog."default"  NOT NULL
     ,name character varying COLLATE pg_catalog."default"  NOT NULL
     ,description character varying COLLATE pg_catalog."default" 
-    ,code character varying COLLATE pg_catalog."default"  NOT NULL
+    ,fullname character varying COLLATE pg_catalog."default"  NOT NULL
 
 
 );
@@ -33,5 +33,5 @@ CREATE TABLE public.country
 
 ---- create above / drop below ----
 
-DROP TABLE public.country;
+DROP TABLE public.user;
 
